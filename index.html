@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ODO SHIPPING - ورود</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
     @font-face {
       font-family: 'BNazanin';
@@ -16,12 +15,67 @@
     }
   </style>
 </head>
-<body class="bg-cover bg-center min-h-screen flex items-center justify-center" style="background-image: url('https://raw.githubusercontent.com/PARVARESHMAHMOOD/ODO-3/main/aerial-view-container-cargo-ship-sea%20(2).jpg');">
-  <div class="bg-blue-900 bg-opacity-80 rounded-xl p-6 w-11/12 sm:w-96 text-white text-center shadow-2xl backdrop-blur-sm">
-    <h1 class="text-3xl font-bold mb-6">ODO SHIPPING</h1>
-    <input type="text" placeholder="نام کاربری" class="w-full mb-4 p-3 rounded text-black focus:outline-none">
-    <input type="password" placeholder="رمز عبور" class="w-full mb-4 p-3 rounded text-black focus:outline-none">
-    <button onclick="location.href='dashboard.html'" class="w-full bg-blue-500 hover:bg-blue-600 transition p-3 rounded text-white font-bold">ورود</button>
+<body class="bg-cover bg-center min-h-screen flex items-center justify-center px-4 py-8" 
+      style="background-image: url('https://raw.githubusercontent.com/PARVARESHMAHMOOD/ODO-3/main/aerial-view-container-cargo-ship-sea%20(2).jpg');">
+
+  <!-- فرم اپلیکیشنی با حالت موبایل -->
+  <div class="bg-white bg-opacity-90 rounded-2xl p-6 w-full max-w-sm text-center shadow-2xl backdrop-blur-md">
+    
+    <!-- لوگو گرد قابل کلیک -->
+    <a href="https://odoshipping.ir/" target="_blank">
+      <img src="https://github.com/PARVARESHMAHMOOD/odo-9/blob/main/ODO.png?raw=true" alt="ODO Logo" class="w-24 h-24 mx-auto mb-3 rounded-full shadow-md hover:scale-110 transition-transform duration-300" />
+    </a>
+    
+    <h1 class="text-xl font-bold text-blue-900 mb-6">ورود به سامانه حمل‌ونقل ODO SHIPPING</h1>
+
+    <!-- فرم ورود -->
+    <input id="containerId" type="text" placeholder="شماره کانتینر (مثلاً: cicu1234567)" 
+           class="w-full mb-4 p-3 rounded border text-black focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm" />
+    
+    <input id="userCode" type="password" placeholder="کد کاربر (مثلاً: Mp0920684068)" 
+           class="w-full mb-4 p-3 rounded border text-black focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm" />
+    
+    <!-- دکمه ورود -->
+    <button onclick="login()" 
+            class="w-full bg-blue-600 hover:bg-blue-700 transition p-3 rounded text-white font-bold flex items-center justify-center gap-2">
+      ورود
+      <svg id="spinner" class="w-4 h-4 animate-spin hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M4 4v5h.582a10 10 0 1010.036-10H16"></path>
+      </svg>
+    </button>
   </div>
+
+  <script>
+    function login() {
+      const containerId = document.getElementById('containerId').value.trim().toLowerCase();
+      const userCode = document.getElementById('userCode').value.trim();
+      const spinner = document.getElementById('spinner');
+
+      const containerRegex = /^[a-z]{4}[0-9]{7}$/;
+      const userCodeRegex = /^Mp[0-9]{10}$/;
+
+      if (!containerId || !userCode) {
+        alert("لطفاً تمام فیلدها را پر کنید.");
+        return;
+      }
+
+      if (!containerRegex.test(containerId)) {
+        alert("فرمت شماره کانتینر نادرست است. (مثال: cicu1234567)");
+        return;
+      }
+
+      if (!userCodeRegex.test(userCode)) {
+        alert("فرمت کد کاربر نادرست است. (مثال: Mp0920684068)");
+        return;
+      }
+
+      spinner.classList.remove("hidden");
+
+      setTimeout(() => {
+        location.href = "dashboard.html";
+      }, 1200);
+    }
+  </script>
 </body>
 </html>
